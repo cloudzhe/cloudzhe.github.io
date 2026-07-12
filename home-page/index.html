@@ -452,20 +452,21 @@
   <script>
     // === Background ===
     /**
-     * Set background from Bing daily wallpaper with fallback
+     * Set background from Lorem Picsum random landscape
      */
     function setBg() {
       var el = document.getElementById('bg');
-      fetch('https://cn.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1&mkt=zh-CN')
-        .then(function(r) { return r.json(); })
-        .then(function(d) {
-          var url = 'https://cn.bing.com' + d.images[0].url;
-          el.style.backgroundImage = 'url(' + url + ')';
-        })
-        .catch(function() {
-          // Fallback: Unsplash random landscape
-          el.style.backgroundImage = 'url(https://source.unsplash.com/1920x1080/?landscape,nature,mountain)';
-        });
+      // Lorem Picsum: free random high-quality images, CORS-friendly
+      var url = 'https://picsum.photos/1920/1080?random=' + Date.now();
+      var img = new Image();
+      img.onload = function() {
+        el.style.backgroundImage = 'url(' + url + ')';
+      };
+      img.onerror = function() {
+        // Keep the default CSS gradient background if image fails
+        el.style.backgroundImage = '';
+      };
+      img.src = url;
     }
     setBg();
     setInterval(setBg, 600000);
@@ -493,45 +494,61 @@
 
     // === Weather ===
     /**
-     * Fetch weather data with multi-level fallback
+     * Map Open-Meteo weather code to Chinese description and FontAwesome icon
+     * @param {number} code - WMO Weather interpretation code
+     * @returns {object} Chinese text and icon class
      */
-    function getWeather() {
-      var el = document.getElementById('weather');
+    function mapWeatherCode(code) {
+      var map = {
+        0: { text: '晴', icon: 'fas fa-sun' },
+        1: { text: '晴间多云', icon: 'fas fa-cloud-sun' },
+        2: { text: '多云', icon: 'fas fa-cloud' },
+        3: { text: '阴', icon: 'fas fa-cloud' },
+        45: { text: '雾', icon: 'fas fa-smog' },
+        48: { text: '雾凇', icon: 'fas fa-smog' },
+        51: { text: '毛毛雨', icon: 'fas fa-cloud-rain' },
+        53: { text: '中毛毛雨', icon: 'fas fa-cloud-rain' },
+        55: { text: '大毛毛雨', icon: 'fas fa-cloud-rain' },
+        61: { text: '小雨', icon: 'fas fa-cloud-rain' },
+        63: { text: '中雨', icon: 'fas fa-cloud-showers-heavy' },
+        65: { text: '大雨', icon: 'fas fa-cloud-showers-heavy' },
+        71: { text: '小雪', icon: 'fas fa-snowflake' },
+        73: { text: '中雪', icon: 'fas fa-snowflake' },
+        75: { text: '大雪', icon: 'fas fa-snowflake' },
+        80: { text: '阵雨', icon: 'fas fa-cloud-rain' },
+        81: { text: '强阵雨', icon: 'fas fa-cloud-showers-heavy' },
+        82: { text: '暴雨', icon: 'fas fa-cloud-showers-heavy' },
+        95: { text: '雷暴', icon: 'fas fa-bolt' },
+        96: { text: '雷暴伴冰雹', icon: 'fas fa-bolt' },
+        99: { text: '雷暴伴大冰雹', icon: 'fas fa-bolt' }
+      };
+      return map[code] || { text: '多云', icon: 'fas fa-cloud' };
+    }
 
-      fetch('https://api.vvhan.com/api/weather')
+    /**
+     * Fetch weather from Open-Meteo (free, no key, CORS enabled)
+     * @param {number} lat - latitude
+     * @param {number} lon - longitude
+     * @param {HTMLElement} el - weather container element
+     */
+    function fetchWeather(lat, lon, el) {
+      var url = 'https://api.open-meteo.com/v1/forecast?latitude=' + lat +
+                '&longitude=' + lon +
+                '&current=temperature_2m,weather_code&timezone=auto';
+      fetch(url)
         .then(function(r) { return r.json(); })
         .then(function(d) {
-          if (d && d.info) {
-            var w = d.info;
-            var icon = 'fas fa-cloud';
-            if (w.type && w.type.indexOf('晴') >= 0) icon = 'fas fa-sun';
-            else if (w.type && (w.type.indexOf('云') >= 0 || w.type.indexOf('阴') >= 0)) icon = 'fas fa-cloud';
-            else if (w.type && w.type.indexOf('雨') >= 0) icon = 'fas fa-cloud-rain';
-            else if (w.type && w.type.indexOf('雪') >= 0) icon = 'fas fa-snowflake';
-            el.innerHTML = '<i class="' + icon + '"></i><span>' +
-              w.city + ' ' + w.type + ' ' + w.low + '~' + w.high + '</span>';
+          if (d && d.current) {
+            var info = mapWeatherCode(d.current.weather_code);
+            var temp = d.current.temperature_2m;
+            el.innerHTML = '<i class="' + info.icon + '"></i><span>' +
+              info.text + ' ' + temp + '°C</span>';
           } else {
             showWeatherFallback(el);
           }
         })
         .catch(function() {
-          fetch('https://wttr.in/?format=j1')
-            .then(function(r) { return r.json(); })
-            .then(function(d) {
-              if (d && d.current_condition) {
-                var c = d.current_condition[0];
-                var area = d.nearest_area ? d.nearest_area[0].areaName[0].value : '未知';
-                var desc = c.weatherDesc ? c.weatherDesc[0].value : '';
-                var temp = c.temp_C ? c.temp_C + '°C' : '';
-                el.innerHTML = '<i class="fas fa-cloud-sun"></i><span>' +
-                  area + ' ' + desc + ' ' + temp + '</span>';
-              } else {
-                showWeatherFallback(el);
-              }
-            })
-            .catch(function() {
-              showWeatherFallback(el);
-            });
+          showWeatherFallback(el);
         });
     }
 
@@ -540,6 +557,27 @@
      */
     function showWeatherFallback(el) {
       el.innerHTML = '<i class="fas fa-cloud-sun"></i><span>天气暂不可用</span>';
+    }
+
+    /**
+     * Get weather: try browser geolocation, fallback to Beijing
+     */
+    function getWeather() {
+      var el = document.getElementById('weather');
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          function(pos) {
+            fetchWeather(pos.coords.latitude, pos.coords.longitude, el);
+          },
+          function() {
+            // Fallback: Beijing coordinates
+            fetchWeather(39.9042, 116.4074, el);
+          },
+          { timeout: 8000 }
+        );
+      } else {
+        fetchWeather(39.9042, 116.4074, el);
+      }
     }
     getWeather();
 

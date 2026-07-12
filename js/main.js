@@ -33,12 +33,20 @@ const sidebarFn = () => {
 const scrollFn = () => {
   const $rightside = document.getElementById("rightside");
   const $header = document.getElementById("page-header");
+  const $cover = document.getElementById("home-cover");
   let initTop = 0;
 
   const updateHeaderAndRightside = (isDown, currentTop) => {
+    const coverHeight = $cover ? $cover.offsetHeight : 0;
+    const scrollPastCover = currentTop > coverHeight - 60;
+
     if (currentTop > 0) {
       $header.classList.toggle("nav-visible", !isDown);
-      $header.classList.add("nav-fixed");
+      if (scrollPastCover) {
+        $header.classList.add("nav-fixed");
+      } else {
+        $header.classList.remove("nav-fixed");
+      }
       if ($rightside) {
         $rightside.style.opacity = "0.8";
         $rightside.style.transform = "translateX(-58px)";
@@ -528,10 +536,17 @@ const sco = {
   },
   addNavBackgroundInit() {
     const scrollTop = document.documentElement.scrollTop;
+    const $cover = document.getElementById("home-cover");
+    const coverHeight = $cover ? $cover.offsetHeight : 0;
     if (scrollTop !== 0) {
       document
         .getElementById("page-header")
-        .classList.add("nav-fixed", "nav-visible");
+        .classList.add("nav-visible");
+      if (scrollTop > coverHeight - 60) {
+        document
+          .getElementById("page-header")
+          .classList.add("nav-fixed");
+      }
     }
   },
   toPage() {

@@ -527,19 +527,17 @@
       var img = new Image();
       img.onload = function () {
         el.style.backgroundImage = 'url(' + url + ')';
-        hideLoader();
       };
       img.onerror = function () {
         // Keep the default CSS gradient background if image fails
         el.style.backgroundImage = '';
-        hideLoader();
       };
       img.src = url;
     }
     setBg();
     setInterval(setBg, 600000);
 
-    // Fallback: hide loader when window fully loaded
+    // Hide loader after all resources loaded
     window.addEventListener('load', hideLoader);
 
     // === Clock ===

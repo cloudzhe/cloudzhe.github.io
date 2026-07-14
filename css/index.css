@@ -9897,11 +9897,10 @@ span.tags-punctuation {
   z-index: 2;
 }
 .banners-welcome {
-  color: var(--efu-white);
+  color: #000;
   font-size: 14px;
   line-height: 1.7;
   text-align: left;
-  text-shadow: 0 2px 8px rgba(0,0,0,0.4);
 }
 .banners-welcome .banners-welcome-title {
   font-size: 20px;

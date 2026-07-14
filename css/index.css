@@ -7236,8 +7236,8 @@ span.tags-punctuation i {
   display: -ms-flexbox;
   display: box;
   display: flex;
-  width: 35px;
-  height: 35px;
+  width: 40px;
+  height: 40px;
   padding: 0 !important;
   -webkit-box-align: center;
   -moz-box-align: center;
@@ -7268,8 +7268,8 @@ span.tags-punctuation i {
   font-size: 20px;
 }
 .back-home-button .back-home-button-icon {
-  width: 20px;
-  height: 20px;
+  width: 40px;
+  height: 40px;
   object-fit: contain;
 }
 .back-home-button:hover {

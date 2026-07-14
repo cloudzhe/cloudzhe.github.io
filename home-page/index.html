@@ -58,38 +58,6 @@
       background: rgba(0, 0, 0, 0.15);
     }
 
-    /* === Loading === */
-    #loading {
-      position: fixed;
-      inset: 0;
-      background: #0d1117;
-      z-index: 999;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: opacity 0.8s ease;
-    }
-
-    #loading.fade {
-      opacity: 0;
-      pointer-events: none;
-    }
-
-    .spinner {
-      width: 44px;
-      height: 44px;
-      border: 3px solid rgba(255, 255, 255, 0.1);
-      border-top-color: #425AEF;
-      border-radius: 50%;
-      animation: spin 0.7s linear infinite;
-    }
-
-    @keyframes spin {
-      to {
-        transform: rotate(360deg);
-      }
-    }
-
     /* === Glass card base === */
     .glass {
       background: rgba(255, 255, 255, 0.12);
@@ -410,11 +378,6 @@
 
 <body>
 
-  <!-- Loading -->
-  <div id="loading">
-    <div class="spinner"></div>
-  </div>
-
   <!-- Background -->
   <div id="bg"></div>
 
@@ -674,12 +637,6 @@
     getHito();
     setInterval(getHito, 30000);
 
-    // === Hide loading ===
-    window.addEventListener('load', function () {
-      setTimeout(function () {
-        document.getElementById('loading').classList.add('fade');
-      }, 400);
-    });
   </script>
 </body>
 

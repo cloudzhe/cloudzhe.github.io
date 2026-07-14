@@ -1,0 +1,471 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><script>if (window.location.hostname === 'wangyuzhe.top' && window.location.pathname === '/') {
+  window.location.replace('https://blog.wangyuzhe.top/start/');
+}
+</script><title>关于页 | CloudCity</title><noscript>开启JavaScript才能访问本站哦~</noscript><link rel="icon" href="/img/my.png"><link rel="stylesheet" href="/css/index.css?v=3.0.21"><link rel="canonical" href="https://wangyuzhe.top/about/index.html"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/css/all.min.css"><!-- Feature-specific CSS--><!-- aplayer--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css"><!-- swiper--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11.0.5/swiper-bundle.min.css"><!-- fancybox ui--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.36/dist/fancybox/fancybox.min.css"><!-- katex--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"><!-- Open Graph--><meta name="description" content="关于页"><!-- pwa--><meta name="apple-mobile-web-app-capable" content="CloudCity"><meta name="theme-color" content="var(--efu-main)"><meta name="apple-mobile-web-app-status-bar-style" content="var(--efu-main)"><link rel="bookmark" href="/img/my.png"><link rel="apple-touch-icon" href="/img/my.png" sizes="180x180"><script>console.log(' %c Solitude %c ' + '3.0.21' + ' %c https://github.com/everfu/hexo-theme-solitude',
+    'background:#35495e ; padding: 1px; border-radius: 3px 0 0 3px;  color: #fff',
+    'background:#ff9a9a ; padding: 1px; border-radius: 0 3px 3px 0;  color: #fff',
+    'background:unset ; padding: 1px; border-radius: 0 3px 3px 0;  color: #fff')
+</script><script>let mdate = "7-7,9-18,12-13";
+mdate = (mdate.split(","));
+let ndate = new Date();
+for (let i of mdate) {
+    if (i === (ndate.getMonth()+1) + "-" + (ndate.getDate())) {
+        document.documentElement.classList.add('memorial');
+    }
+}
+</script><style>
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  filter: blur(8px);
+  -webkit-filter: blur(8px);
+  z-index: -1;
+  opacity: 0.9;
+  transition: background-image 1s ease;
+}
+body {
+  background: transparent !important;
+}
+.solitude-icon {
+  width: 26px;
+  height: 26px;
+  vertical-align: middle;
+  display: inline-block;
+}
+</style>
+<script>
+(function() {
+  document.addEventListener('DOMContentLoaded', function() {
+    var coverBg = document.querySelector('#home-cover .cover-background');
+    if (coverBg) {
+      var bgImage = coverBg.style.backgroundImage;
+      if (bgImage) {
+        var style = document.createElement('style');
+        style.textContent = 'body::before { background-image: ' + bgImage + '; }';
+        document.head.appendChild(style);
+      }
+    }
+  });
+})();
+</script>
+<script>(()=>{
+        const saveToLocal = {
+            set: function setWithExpiry(key, value, ttl) {
+                if (ttl === 0)
+                    return
+                const now = new Date()
+                const expiryDay = ttl * 86400000
+                const item = {
+                    value: value,
+                    expiry: now.getTime() + expiryDay
+                }
+                localStorage.setItem(key, JSON.stringify(item))
+            },
+            get: function getWithExpiry(key) {
+                const itemStr = localStorage.getItem(key)
+
+                if (!itemStr) {
+                    return undefined
+                }
+                const item = JSON.parse(itemStr)
+                const now = new Date()
+
+                if (now.getTime() > item.expiry) {
+                    localStorage.removeItem(key)
+                    return undefined
+                }
+                return item.value
+            }
+        };
+        window.utils = {
+            saveToLocal: saveToLocal,
+            getCSS: (url, id = false) => new Promise((resolve, reject) => {
+              const link = document.createElement('link')
+              link.rel = 'stylesheet'
+              link.href = url
+              if (id) link.id = id
+              link.onerror = reject
+              link.onload = link.onreadystatechange = function() {
+                const loadState = this.readyState
+                if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+                link.onload = link.onreadystatechange = null
+                resolve()
+              }
+              document.head.appendChild(link)
+            }),
+            getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+              const script = document.createElement('script')
+              script.src = url
+              script.async = true
+              script.onerror = reject
+              script.onload = script.onreadystatechange = function() {
+                const loadState = this.readyState
+                if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+                script.onload = script.onreadystatechange = null
+                resolve()
+              }
+
+              Object.keys(attr).forEach(key => {
+                script.setAttribute(key, attr[key])
+              })
+
+              document.head.appendChild(script)
+            }),
+            addGlobalFn: (key, fn, name = false, parent = window) => {
+                const globalFn = parent.globalFn || {}
+                const keyObj = globalFn[key] || {}
+
+                if (name && keyObj[name]) return
+
+                name = name || Object.keys(keyObj).length
+                keyObj[name] = fn
+                globalFn[key] = keyObj
+                parent.globalFn = globalFn
+            },
+            addEventListenerPjax: (ele, event, fn, option = false) => {
+              ele.addEventListener(event, fn, option)
+              utils.addGlobalFn('pjax', () => {
+                  ele.removeEventListener(event, fn, option)
+              })
+            },
+            diffDateFormat: (selector) => {
+                selector.forEach(item => {
+                    const date = new Date(item.getAttribute('datetime') || item.textContent);
+                    item.textContent = (date.getMonth() + 1).toString()+'/'+date.getDate().toString();
+                });
+            },
+        }
+    })()</script><!-- theme--><script>initTheme = () => {
+    let isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+    const cachedMode = utils.saveToLocal.get('theme');
+    if (cachedMode === undefined) {
+        const nowMode =
+            isDarkMode ? 'dark' : 'light'
+        document.documentElement.setAttribute('data-theme', nowMode);
+    } else {
+        document.documentElement.setAttribute('data-theme', cachedMode);
+    }
+    typeof rm === 'object' && rm.mode(cachedMode === 'dark' && isDarkMode)
+}
+initTheme()</script><script>const GLOBAL_CONFIG = {
+    root: '/',
+    algolia: undefined,
+    localsearch: {"preload":false,"path":"/search.xml"},
+    runtime: '2026-04-30 00:00:00',
+    lazyload: {
+        enable: true,
+        error: '/img/error_load.avif'
+    },
+    copyright: {"limit":50,"author":"作者: CloudZhe","link":"链接: ","source":"来源: CloudCity","info":"著作权归作者所有。 商业转载请联系作者获得授权，非商业转载请注明出处。"},
+    highlight: {"limit":200,"expand":true,"copy":true,"syntax":"highlight.js"},
+    randomlink: false,
+    lang: {"theme":{"dark":"已切换至深色模式","light":"已切换至浅色模式"},"copy":{"success":"复制成功","error":"复制失败"},"backtop":"返回顶部","time":{"day":"天前","hour":"小时前","just":"刚刚","min":"分钟前","month":"个月前"},"day":" 天","f12":"开发者模式已打开，请遵循GPL协议。","totalk":"无需删除空行，直接输入评论即可","search":{"empty":"找不到你查询的内容：${query}","hit":"找到 ${hits} 条结果，用时 ${time} 毫秒","placeholder":"输入关键词快速查找","count":"共 <b>${count}</b> 条结果。","loading":"搜索中..."}},
+    aside: {
+        state: {
+            morning: "✨ 早上好，新的一天开始了",
+            noon: "🍲 午餐时间",
+            afternoon: "🌞 下午好",
+            night: "早点休息",
+            goodnight: "晚安 😴",
+        },
+        witty_words: ["祝你好运，陌生人"],
+        witty_comment: {
+            prefix: '好久不见，',
+            back: '欢迎再次回来，',
+        },
+    },
+    covercolor: {
+        enable: true
+    },
+    comment: false,
+    lightbox: 'fancybox',
+    right_menu: {"mode":{"dark":"深色模式","light":"浅色模式"},"img_error":"此图片无法复制与下载","music":{"start":"播放音乐","stop":"暂停音乐"},"translate":true,"ctrlOriginalMenu":"按住Ctrl+右键可打开浏览器右键菜单"},
+    translate: {"translateDelay":0,"defaultEncoding":2},
+    lure: {"jump":"404 Not Found","back":"ヾ(≧∇≦*)ゝHey, hey, you fell for it."},
+    expire: {"time":90,"position":"top","text_prev":"本文发布于 ","text_next":" 天前，内容可能已过时。"},
+};</script><script id="config-diff">var PAGE_CONFIG = {
+    is_post: false,
+    is_page: true,
+    is_home: false,
+    page: 'about',
+    toc: false,
+    comment: false,
+    ai_text: false,
+    color: false,
+}</script><meta name="generator" content="Hexo 8.1.1"></head><body id="body" data-type="about"><div><canvas id="universe"></canvas></div><div><div id="loading-box" onclick="preloader.endLoading();" style="zoom:1"><div class="loading-bg"><img class="loading-img nolazyload" src="/img/my.png" alt="loading image"></div></div><script>const preloader = {
+    isLoaded: false,
+    endLoading: () => {
+        if (!preloader.isLoaded) {
+            document.getElementById('loading-box').classList.add('loaded');
+            preloader.isLoaded = true;
+            preloader.togglePaceDone();
+        }
+    },
+    initLoading: () => {
+        document.getElementById('loading-box').classList.remove('loaded');
+        preloader.isLoaded = false;
+        preloader.togglePaceDone();
+    },
+    togglePaceDone: () => {
+        document.getElementById('body').className = preloader.isLoaded ? 'pace-done' : '';
+    }
+}
+
+window.addEventListener('load', () => {
+    preloader.endLoading();
+});
+
+window.addEventListener('pjax:send', () => {
+    preloader.initLoading();
+});
+
+document.addEventListener('pjax:complete', () => {
+    preloader.endLoading();
+});
+
+setTimeout(() => {
+    preloader.endLoading();
+}, 5000);</script></div><div><div id="console"><div class="close-btn" onclick="sco.hideConsole()"><i class="solitude fas fa-xmark"></i></div><div class="console-card-group"><div class="console-card-group-right"><div class="console-card tags" onclick="sco.hideConsole()"><div class="card-content"><div class="author-content-item-tips">标签</div><div class="author-content-item-title">寻找感兴趣的领域</div></div><div class="card-tag-cloud"><a href="/tags/Hexo/">Hexo<sup>1</sup></a><a href="/tags/%E9%9A%8F%E7%AC%94/">随笔<sup>1</sup></a></div></div><div class="console-card history" onclick="sco.hideConsole()"><ul class="card-archive-list"><li class="item"><a href="/archives/2026/05/"><span class="date">2026/05</span><div class="count-group"><span class="count">1</span><span class="unit">篇</span></div></a></li><li class="item"><a href="/archives/2026/04/"><span class="date">2026/04</span><div class="count-group"><span class="count">1</span><span class="unit">篇</span></div></a></li><li class="item"><a href="/archives/"><span class="date">全部文章</span><div class="count-group"><span class="count">2</span><span class="unit">篇</span></div></a></li></ul></div></div></div><div class="button-group"><div class="console-btn-item"><span class="darkmode_switchbutton" onclick="sco.switchDarkMode()" title="昼夜切换"><i class="solitude fas fa-circle-half-stroke"></i></span></div><div class="console-btn-item" id="consoleHideAside"><span class="asideSwitch" onclick="sco.switchHideAside()" title="边栏显示控制"><i class="solitude fas fa-arrows-left-right-to-line"></i></span></div><div class="console-btn-item" id="consoleKeyboard" onclick="sco.switchKeyboard()"><span class="keyboardSwitch" title="键盘快捷键"><i class="solitude fas fa-keyboard"></i></span></div><div class="console-btn-item" id="consoleMusic" onclick="sco.musicToggle()"><span class="music-switch" title="音乐开关"><i class="solitude fas fa-compact-disc"></i></span></div></div><div class="console-mask" onclick="sco.hideConsole()"></div></div></div><div id="sidebar" style="zoom: 1;"><div id="menu-mask" style="display: none;"></div><div id="sidebar-menus"><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">2</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">2</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/recentcomments/"><div class="headline">评论</div></a></div></div></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><span class="darkmode_switchbutton menu-child" onclick="sco.switchDarkMode()"><i class="solitude fas fa-circle-half-stroke"></i><span>显示模式</span></span></div><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">主页</div><div class="back-menu-list"><a class="back-menu-item" href="https://wangyuzhe.top/home-page/" title="主页"><span class="back-menu-item-text">主页</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">文章</div><div class="back-menu-list"><a class="back-menu-item" href="/archives/" title="文章"><span class="back-menu-item-text">文章</span></a></div></div></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/tags/"><span>标签</span></a></div><div class="menus_item"><a class="site-page" href="/links/"><span>友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><span>关于</span></a></div><div class="menus_item"><a class="site-page" href="/kit/"><span>装备</span></a></div></div><span class="sidebar-menu-item-title">标签</span><div class="card-tags"><div class="card-tag-cloud"><a href="/tags/Hexo/">Hexo<sup>1</sup></a><a href="/tags/%E9%9A%8F%E7%AC%94/">随笔<sup>1</sup></a></div></div><span class="sidebar-menu-item-title">网站信息</span><div class="webinfo"><div class="webinfo-item"><div class="item-name">全站字数 :</div><div class="item-count">86</div></div></div></div></div><div><div id="keyboard-tips"><div class="keyboardTitle">博客快捷键</div><div class="keyboardList"><div class="keyboardItem"><div class="keyGroup"><div class="key">Shift</div><div class="key">K</div></div><div class="keyContent"><div class="content">关闭快捷菜单</div></div></div><div class="keyboardItem"><div class="keyGroup"><div class="key">Shift</div><div class="key">A</div></div><div class="keyContent"><div class="content">打开控制台</div></div></div><div class="keyboardItem"><div class="keyGroup"><div class="key">Shift</div><div class="key">M</div></div><div class="keyContent"><div class="content">播放/暂停音乐</div></div></div><div class="keyboardItem"><div class="keyGroup"><div class="key">Shift</div><div class="key">L</div></div><div class="keyContent"><div class="content">打开友链</div></div></div></div></div><script>const keyboard_addKeyup = (e) => {
+    if (e.key === 'Shift') {
+        document.getElementById('keyboard-tips').classList.remove('show');
+    }
+}
+
+const keyboard_addKeydown = (e) => {
+    const keyboards = [{"name":"关闭快捷菜单","key":"K","func":"keyboard"},{"name":"打开控制台","key":"A","sco":"showConsole"},{"name":"播放/暂停音乐","key":"M","sco":"musicToggle"},{"name":"打开友链","key":"L","url":"/links/"}];
+    if (e.key === 'Shift') {
+        document.getElementById('keyboard-tips').classList.add('show');
+    }
+
+    for (let i = 0; i < keyboards.length; i++) {
+        if (keyboards[i].url) {
+            if (keyboards[i].url.startsWith('http')) {
+                if (e.key === keyboards[i].key) {
+                    window.open(keyboards[i].url);
+                }
+            } else {
+                if (e.key === keyboards[i].key) {
+                    pjax.loadUrl(keyboards[i].url);
+                }
+            }
+        } else if (keyboards[i].sco) {
+            if (e.key === keyboards[i].key) {
+                sco[keyboards[i].sco]();
+            }
+        } else if (keyboards[i].func) {
+            if (e.key === keyboards[i].key) {
+                window[keyboards[i].func]();
+            }
+        }
+    }
+}
+
+function openKeyboard() {
+
+    window.addEventListener('keyup', keyboard_addKeyup);
+
+    window.addEventListener('keydown', keyboard_addKeydown);
+}
+function closeKeyboard() {
+
+    window.removeEventListener('keyup', keyboard_addKeyup);
+
+    window.removeEventListener('keydown', keyboard_addKeydown);
+}
+
+var sco_keyboards = localStorage.getItem('keyboard') === 'true'
+if (sco_keyboards) {
+    openKeyboard();
+    let keyboard = document.getElementById('consoleKeyboard');
+    keyboard?.classList.add('on');
+}</script></div><div><div class="needEndHide" id="rightside"><div class="rs_hide"><button class="keyboard pc" type="button" title="键盘快捷键" onclick="sco.switchKeyboard()"><i class="fas fa-keyboard"></i></button></div><div class="rs_show"><button class="top" type="button" title="返回顶部" onclick="sco.toTop()"><i class="fas fa-arrow-up"></i><span id="percent">0</span></button></div></div></div><div class="page" id="body-wrap"><header class="not-top-img" id="page-header"><nav class="show" id="nav"><div id="nav-group"><div id="blog_name"><div class="back-home-button" tabindex="-1"><i class="solitude fas fa-bars-progress"></i><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">主页</div><div class="back-menu-list"><a class="back-menu-item" href="https://wangyuzhe.top/home-page/" title="主页"><span class="back-menu-item-text">主页</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">文章</div><div class="back-menu-list"><a class="back-menu-item" href="/archives/" title="文章"><span class="back-menu-item-text">文章</span></a></div></div></div></div><a href="/" title="返回博客主页" id="site-name"><span class="title">Cloudzhe</span><i class="solitude fas fa-home"></i></a></div><div id="page-name-mask"><div id="page-name"><a id="page-name-text" onclick="sco.toTop()">关于页</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/tags/"><span>标签</span></a></div><div class="menus_item"><a class="site-page" href="/links/"><span>友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><span>关于</span></a></div><div class="menus_item"><a class="site-page" href="/kit/"><span>装备</span></a></div></div></div><div id="nav-left"></div><div id="nav-right"><div class="nav-button" id="travellings_button"><a class="site-page" target="_blank" rel="noopener" href="https://www.travellings.cn/go.html" title=""><i class="solitude fas fa-train"></i></a></div><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机一篇文章" href="javascript:void(0);"><i class="solitude fas fa-dice-d6"></i></a></div><div class="nav-button" id="search-button"><a class="site-page social-icon search" href="javascript:void(0);" title="搜索"><i class="solitude fas fa-magnifying-glass"></i></a></div><div class="nav-button" id="nav-console"><a class="console_switchbutton" onclick="sco.showConsole()" title="中控台" href="javascript:void(0);"><label><i class="left"></i><i class="center"></i><i class="right"></i></label></a></div><div id="toggle-menu"><a class="site-page"><i class="solitude fas fa-bars"></i></a></div><script>/**
+ * 切换通知面板的显示与隐藏状态
+ */
+function toggleNotification() {
+    var panel = document.getElementById('notification-panel');
+    if (panel) {
+        panel.classList.toggle('is-show');
+    }
+}
+
+/**
+ * 更新通知徽标显示的未读评论数量
+ * 尝试从 twikoo 获取最近评论并统计未读数量
+ * 若 twikoo 未定义或获取失败则显示 0
+ */
+function updateNotificationCount() {
+    var countEl = document.getElementById('notification-count');
+    if (typeof twikoo === 'undefined' || !twikoo) {
+        if (countEl) countEl.textContent = '0';
+        return;
+    }
+    try {
+        var result = twikoo.getRecentComments({ pageSize: 10 });
+        if (result && typeof result.then === 'function') {
+            result.then(function (res) {
+                var comments = (res && res.comments) ? res.comments : (Array.isArray(res) ? res : []);
+                var unread = comments.filter(function (c) { return !c.read; }).length;
+                if (countEl) countEl.textContent = String(unread);
+            }).catch(function () {
+                if (countEl) countEl.textContent = '0';
+            });
+        }
+    } catch (e) {
+        if (countEl) countEl.textContent = '0';
+    }
+}
+
+/**
+ * 页面加载完成后初始化通知数量
+ */
+document.addEventListener('DOMContentLoaded', function () {
+    updateNotificationCount();
+});</script></div></div></nav></header><main class="layout hide-aside" id="content-inner"><div id="page"><div id="about-page"><div class="author-info"><div class="author-tag-left"><span class="author-tag">🤖️ 数码科技爱好者</span><span class="author-tag">🔍 分享与热心帮助</span><span class="author-tag">🏠 智能家居小能手</span></div><div class="author-img"><img src= "" data-lazy-src="/img/my.png"/></div><div class="author-tag-right"><span class="author-tag">脚踏实地行动派 🏃</span><span class="author-tag">团队小组发动机 🧱</span><span class="author-tag">壮汉人狠话不多 💢</span></div></div><div class="author-title">关于本站</div><div class="author-content"><div class="author-content-item myInfoAndWittyWord"><div class="title1">你好，很高兴认识你👋</div><div class="title2"><span class="inline-word">我叫CloudZhe</span></div><div class="title1">是一名学生、产品经理、独立开发者、博主</div></div><div class="aboutsiteTips author-content-item"><div class="author-content-item-tips">追求</div><h2><span class="inline-word">源于<br>热爱而去创造</span><div class="mask"><span class="first-tips" data-show="">优秀的产品</span><span>出色的设计</span><span>高效的编程</span><span data-up="">人性化的用户体验</span></div></h2></div></div><script>var pursuitInterval = null;
+pursuitInterval = setInterval(function () {
+    const show = document.querySelector('span[data-show]')
+    const next = show.nextElementSibling || document.querySelector('.first-tips')
+    const up = document.querySelector('span[data-up]')
+    if (up) {
+        up.removeAttribute('data-up')
+    }
+    show.removeAttribute('data-show')
+    show.setAttribute('data-up', '')
+    next.setAttribute('data-show', '')
+}, 2000)
+
+document.addEventListener('pjax:send', function () {
+    clearInterval(pursuitInterval);
+});</script><div class="author-content"><div class="author-content-item skills"><div class="card-content"><div class="author-content-item-tips">技能</div><span class="author-content-item-title">开启创造力</span><div class="skills-style-group"><div class="tags-group-all"><div class="tags-group-wrapper"><div class="tags-group-icon-pair"><div class="tags-group-icon" style="background:#fff"><i class="fab fa-java" title="Java" style="color: "></i></div><div class="tags-group-icon" style="background:#57b6e6"><i class="fab fa-docker" title="Docker" style="color: "></i></div></div><div class="tags-group-icon-pair"><div class="tags-group-icon" style="background:#333"><i class="fab fa-node" title="Node" style="color: "></i></div><div class="tags-group-icon" style="background:#b8f0ae"><i class="fab fa-vuejs" title="Vue" style="color: "></i></div></div><div class="tags-group-icon-pair"><div class="tags-group-icon" style="background:#f7cb4f"><i class="fab fa-js" title="JS" style="color: "></i></div><div class="tags-group-icon" style="background:#e9572b"><i class="fab fa-html5" title="HTML" style="color: "></i></div></div><div class="tags-group-icon-pair"><div class="tags-group-icon" style="background:#df5b40"><i class="fab fa-git" title="Git" style="color: "></i></div><div class="tags-group-icon" style="background:#fff"><i class="fab fa-java" title="Java" style="color: "></i></div></div><div class="tags-group-icon-pair"><div class="tags-group-icon" style="background:#57b6e6"><i class="fab fa-docker" title="Docker" style="color: "></i></div><div class="tags-group-icon" style="background:#333"><i class="fab fa-node" title="Node" style="color: "></i></div></div><div class="tags-group-icon-pair"><div class="tags-group-icon" style="background:#b8f0ae"><i class="fab fa-vuejs" title="Vue" style="color: "></i></div><div class="tags-group-icon" style="background:#f7cb4f"><i class="fab fa-js" title="JS" style="color: "></i></div></div><div class="tags-group-icon-pair"><div class="tags-group-icon" style="background:#e9572b"><i class="fab fa-html5" title="HTML" style="color: "></i></div><div class="tags-group-icon" style="background:#df5b40"><i class="fab fa-git" title="Git" style="color: "></i></div></div></div></div><div class="skills-list"><div class="skill-info"><div class="skill-icon" style="background:#fff"><i class="fab fa-java" title="Java" style="color: "></i></div><div class="skill-name"><span>Java</span></div></div><div class="skill-info"><div class="skill-icon" style="background:#57b6e6"><i class="fab fa-docker" title="Docker" style="color: "></i></div><div class="skill-name"><span>Docker</span></div></div><div class="skill-info"><div class="skill-icon" style="background:#333"><i class="fab fa-node" title="Node" style="color: "></i></div><div class="skill-name"><span>Node</span></div></div><div class="skill-info"><div class="skill-icon" style="background:#b8f0ae"><i class="fab fa-vuejs" title="Vue" style="color: "></i></div><div class="skill-name"><span>Vue</span></div></div><div class="skill-info"><div class="skill-icon" style="background:#f7cb4f"><i class="fab fa-js" title="JS" style="color: "></i></div><div class="skill-name"><span>JS</span></div></div><div class="skill-info"><div class="skill-icon" style="background:#e9572b"><i class="fab fa-html5" title="HTML" style="color: "></i></div><div class="skill-name"><span>HTML</span></div></div><div class="skill-info"><div class="skill-icon" style="background:#df5b40"><i class="fab fa-git" title="Git" style="color: "></i></div><div class="skill-name"><span>Git</span></div></div><div class="etc">...</div></div></div></div></div></div><div class="author-content"><div class="author-content-item personalities"><div class="author-content-item-tips">性格</div><span class="author-content-item-title">主人公</span><div class="title2" style="color:#56a178">ENFJ-A</div><div class="image"><img class="nolazyload" src="https://cdn.lightxi.com/cloudreve/uploads/2025/07/31/4jR76Exr_enfj.svg"/></div><div class="post-tips">在 <a target="_blank" rel="noopener" href="https://www.16personalities.com/">16personalities </a>了解更多关于 <a target="_blank" rel="noopener" href="https://www.16personalities.com/ch/endj">主人公</a></div></div><div class="author-content-item myphoto"><img class="author-content-img" src= "" data-lazy-src="https://upload-bbs.miyoushe.com/upload/2024/09/24/259501520/9a92adec53b33ef3d464e4e6f9024b9d_5212234452077774263.jpg?x-oss-process=image/resize,s_600/quality,q_80/auto-orient,0/interlace,1/format,jpg" alt="my photo"/></div></div><div class="author-content"><div class="author-content-item maxim"><div class="author-content-item-tips">座右铭</div><span class="maxim-title"><span>以梦为马，</span><span>不负韶华。</span></span></div><div class="author-content-item buff"><div class="card-content"><div class="author-content-item-tips">特长</div><span class="buff-title"><span>绘画，编程，设计<span class="inline-word">专家</span></span><span>学习能力<span class="inline-word">MAX</span></span></span></div></div></div><div class="author-content"><style>.game-0::after {
+    box-shadow: 0 -69px 203px 11px #04120f inset !important;
+}</style><div class="author-content-item game game-0" style="background: url(https://pvzh3.giantapp.cn/upload/3f29db27b53044378a9ee75ce732142c/wallpapers/8df0e92f672742cc122b2d7508f4031f/1730625931265_vL0IZ.jpg) no-repeat top; background-size: cover;"><div class="card-content"><div class="author-content-item-tips">游戏爱好</div><span class="author-content-item-title">无畏契约手游</span><div class="content-bottom"><div class="tips">控场</div><div class="tips">暮蝶</div></div></div></div><style>.game-1::after {
+    box-shadow: 0 -69px 203px 11px #415dc9 inset !important;
+}</style><div class="author-content-item game game-1" style="background: url(https://cdn.mcblock.top/uploads/wallpapers/wp_1775265951132_b6cz4oiu/compressed.webp) no-repeat top; background-size: cover;"><div class="card-content"><div class="author-content-item-tips">游戏爱好</div><span class="author-content-item-title">Minecraft</span><div class="content-bottom"></div></div></div></div><div class="author-content"><div class="author-content-item comic"><div class="card-content"><div class="author-content-item-tips">爱好电影</div><span class="author-content-item-title">电影</span><div class="content-bottom"><div class="tips">科幻、动漫、喜剧</div></div><div class="comic-box"><a class="comic-item" href="https://movie.douban.com/subject/35267208/" target="_blank" rel="noopener noreferrer" title="流浪地球2"><div class="comic-item-cover"><img class="nolazyload" src="https://ts1.tc.mm.bing.net/th/id/R-C.30b7feac4712708ec431965067aa90a3?rik=u13cGXyxUL4o1A&amp;riu=http%3a%2f%2fn.sinaimg.cn%2ftranslate%2f703%2fw2048h1055%2f20190310%2fdGYX-htzuhtp5559817.jpg&amp;ehk=nwFzyFwgic9kDLxZejVd2GXZerBGT9OiH0M1trl%2fKYc%3d&amp;risl=&amp;pid=ImgRaw&amp;r=0" alt="流浪地球2"/></div></a></div></div></div><div class="author-content-item like-technology" style="background: url(https://edgeoneimg.cdn.sn/i/69f4d3d8058c4_1777652696.png) no-repeat center/cover"><div class="card-content"><div class="author-content-item-tips">关注偏好</div><span class="author-content-item-title">产品</span><div class="content-bottom"><div class="tips">做人民满意的项目</div></div></div></div><div class="author-content-item like-music" style="background: url(/img/default.avif) no-repeat center/cover"><div class="card-content"><div class="author-content-item-tips">音乐偏好</div><span class="author-content-item-title">轻音乐</span><div class="content-bottom"><div class="tips">跟 CloudZhe 一起欣赏更多音乐</div></div></div></div></div><div class="author-content"><div class="about-statistic author-content-item" style="background: url(/img/default.avif);"><div class="card-content"><div class="author-content-item-tips">数据</div><span class="author-content-item-title">访问统计</span><div id="statistic"></div><div class="post-tips">本站采用自建数据统计</div></div><script>fetch("https://umami-api.holyfox.net/")
+    .then(res => res.json())
+    .then(data => {
+        const title = {"today_uv": "今日人数", "today_pv": "今日访问", "yesterday_uv": "昨日人数", "yesterday_pv": "昨日访问", "last_month_pv": "最近月访问", "last_year_pv": "最近年访问"};
+
+        let s = document.getElementById("statistic");
+
+        for (let key in data) {
+        if (data.hasOwnProperty(key) && title[key]) {
+            s.innerHTML += `<div><span>${title[key]}</span><span id="${key}">${data[key]}</span></div>`;
+        }
+        }
+    });
+
+</script></div><style>:root {
+    --site-about-oneself-map--light: url(https://edgeoneimg.cdn.sn/i/69f4d46165dd6_1777652833.png);
+    --site-about-oneself-map--dark: url(https://edgeoneimg.cdn.sn/i/69f4d46165dd6_1777652833.png);
+}</style><div class="author-content-item-group column mapAndInfo"><div class="author-content-item map single"><span class="map-title">我现在住在中国，贵州省</span></div><div class="author-content-item selfInfo single"><div><span class="selfInfo-title">生于</span><span class="selfInfo-content" style="color: #43a6c6;">2011</span></div><div><span class="selfInfo-title">性别</span><span class="selfInfo-content" style="color: #e74c3c;">男</span></div><div><span class="selfInfo-title">现在职业</span><span class="selfInfo-content" style="color: #b04fe6;">学生</span></div></div></div></div><div class="author-content"><div class="create-site-post author-content-item single"><div class="author-content-item-tips">心路历程</div><span class="author-content-item-title">为什么建站？</span><br>创建这个站的时候，想要就是能够有一个自己能够<b>积累知识、积累兴趣</b>的地方。和他人分享，会让这些成为积累和沉淀。如果能够帮助到更多的人，帮助更多人解决问题，那一定是非常棒的事情。 <br> 与大多数垂直类的技术博客不同，这里的种类会非常的繁杂，有<b>技能的教程干货</b>、有<b>生活上的吐槽和妙招</b>、有<b>话题上的思考和想法</b>。一般我研究什么、发现了什么都会分享在这里。 <br> 这些就是创造这个小站的本意，<b>也是我分享生活的方式</b>。有幸能和你相遇在这里，相信我们能共同留下一段美好记忆。 <br></div></div><div class="author-content" id="tenyear"><div class="create-site-post author-content-item single"><div class="author-content-item-tips">十年之约</div><div class="author-content-item-title">一个人的寂寞，一群人的狂欢。</div><p></p><div class="tenyear-timeline"><div class="progress"></div><div class="past-time"></div><div class="percentage-label"></div></div><div class="time-labels"><div class="start-time" id="tenyear-start-time">2026/5/1</div><div class="end-time" id="tenyear-end-time">2036/5/1</div></div></div></div><script>function updateTenYearProgress() {
+    let progressElement = document.querySelector(".progress");
+    let pastTimeElement = document.querySelector(".past-time");
+    let percentageLabelElement = document.querySelector(".percentage-label");
+    let startTimeElement = document.getElementById("tenyear-start-time");
+    let endTimeElement = document.getElementById("tenyear-end-time");
+    let startTime = new Date(startTimeElement.textContent).getTime();
+    let endTime = new Date(endTimeElement.textContent).getTime();
+
+    const currentTime = new Date().getTime();
+    const progress = ((currentTime - startTime) / (endTime - startTime) * 100);
+    const progressPercentage = Math.min(progress, 100) + "%";
+
+    pastTimeElement.style.setProperty("--past-time-percentage", progress + "%");
+    progressElement.style.setProperty("--progress-percentage", progressPercentage);
+    if (progress > 5) {
+        percentageLabelElement.textContent = `${progress.toFixed(0)}%`;
+        percentageLabelElement.style.left = `calc(${progress}% - 35px)`;
+    }
+
+    percentageLabelElement.style.visibility = "visible";
+}
+
+if (document.getElementById("tenyear")) {
+    updateTenYearProgress();
+}</script></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="welcome-banner"><span>欢迎光临</span></div><div class="card-info-avatar is-center"><div class="top-group"><div class="sayhi" id="sayhi" onclick="sco.changeWittyWord()"></div></div></div><div class="avatar"><img alt="头像" src= "" data-lazy-src="/img/my.png"></div><div class="description">这是我的博客 / This is my Blog</div><div class="bottom-group"><span class="left"><div class="name">CloudZhe</div><div class="desc">永远相信美好的事情即将发生。</div></span><div class="social-icons is-center"><a class="social-icon" target="_blank" rel="noopener" href="https://github.com/cloudzhe" title="Github"><i class="solitude  fab fa-github"></i></a><a class="social-icon" target="_blank" rel="noopener" href="https://space.bilibili.com/2062780287" title="Bilibili"><i class="solitude  fab fa-bilibili"></i></a></div></div></div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="solitude fas fa-map"></i><span>最近发布</span></div><div class="aside-list"><a class="aside-list-item" href="/2026/05/01/%E5%8F%91%E5%8F%91%E5%8F%91/" title="发发发"><div class="thumbnail"><img alt="发发发" src= "" data-lazy-src="/img/bg2.png"></div><div class="content"><span class="title" href="/2026/05/01/%E5%8F%91%E5%8F%91%E5%8F%91/" title="发发发">发发发</span><span class="categories" href="/2026/05/01/%E5%8F%91%E5%8F%91%E5%8F%91/">生活</span></div></a><a class="aside-list-item" href="/2026/04/30/hello-world/" title="Hello World"><div class="thumbnail"><img alt="Hello World" src= "" data-lazy-src="/img/bg1.png"></div><div class="content"><span class="title" href="/2026/04/30/hello-world/" title="Hello World">Hello World</span><span class="categories" href="/2026/04/30/hello-world/">技术</span></div></a></div></div><div class="card-widget card-tags card-archives card-webinfo card-allinfo"><div class="card-tag-cloud"><a href="/tags/Hexo/">Hexo<sup>1</sup></a><a href="/tags/%E9%9A%8F%E7%AC%94/">随笔<sup>1</sup></a></div><style>.card-tag-cloud::after {
+    display: none !important;
+}</style><hr><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章总数 :</div><div class="item-count">2</div></div><div class="webinfo-item"><div class="item-name">总访问数 :</div><span id="busuanzi_value_site_pv"><i class="solitude fas fa-spinner fa-spin"></i></span></div><div class="webinfo-item"><div class="item-name">总访客数 :</div><span id="busuanzi_value_site_uv"><i class="solitude fas fa-spinner fa-spin"></i></span></div><div class="webinfo-item"><div class="item-name">建站天数 :</div><div class="item-count" id="runtimeshow"></div></div><div class="webinfo-item"><div class="item-name">最后更新 :</div><time class="item-count" datetime="2026-07-14T04:02:37.764Z"></time></div><div class="webinfo-item"><div class="item-name">全站字数 :</div><div class="item-count">86</div></div></div></div></div></div></main><footer id="footer"><div id="footer_deal"><a class="deal_link" target="_blank" rel="noopener" href="https://github.com/cloudzhe" title="Github"><i class="solitude fab fa-github"></i></a><a class="deal_link" href="mailto:649015069@qq.com" title="Mail"><i class="solitude far fa-envelope"></i></a><div><div class="nolazyload footer_mini_logo" id="footer_mini_logo" title="返回顶部" onclick="sco.toTop()"><img src= "" data-lazy-src="/img/my.png" alt="返回顶部"></div></div><a class="deal_link" target="_blank" rel="noopener" href="https://space.bilibili.com/2062780287" title="Bilibili"><i class="solitude fab fa-bilibili"></i></a><a class="deal_link" target="_blank" rel="noopener" href="https://xhslink.com/m/8sF485sZjOC" title="小红书"><img class="solitude-icon" src= "" data-lazy-src="/img/xiaohongshu.svg" alt="icon"></a></div><div id="st-footer"></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div class="copyright">© 2026 By<a class="footer-bar-link" href="/" title="CloudZhe">CloudZhe</a></div><div class="beian-group"><a class="footer-bar-link" target="_blank" rel="noopener" href="https://hexo.io/" title="框架：Hexo">框架：Hexo</a><a class="footer-bar-link" target="_blank" rel="noopener" href="https://github.com/everfu/hexo-theme-solitude" title="主题：Solitude">主题：Solitude</a></div></div><div class="footer-bar-right"></div></div></div><div class="comment-barrage needEndHide"></div></footer></div><div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="solitude fas fa-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="solitude fas fa-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="solitude fas fa-arrows-rotate"></i></div><div class="rightMenu-item" id="menu-top"><i class="solitude fas fa-arrow-up"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuPlugin"><div class="rightMenu-item" id="menu-copytext"><i class="solitude fas fa-clone"></i><span>复制选中文本</span></div><div class="rightMenu-item" id="menu-pastetext"><i class="solitude fas fa-clipboard"></i><span>粘贴文本</span></div><div class="rightMenu-item" id="menu-newwindow"><i class="solitude far fa-window-maximize"></i><span>新窗口打开</span></div><div class="rightMenu-item" id="menu-copylink"><i class="solitude fas fa-link"></i><span>复制链接地址</span></div><div class="rightMenu-item" id="menu-copyimg"><i class="solitude fas fa-clone"></i><span>复制此图片</span></div><div class="rightMenu-item" id="menu-downloadimg"><i class="solitude fas fa-cloud-arrow-down"></i><span>下载此图片</span></div><div class="rightMenu-item" id="menu-search"><i class="solitude fas fa-magnifying-glass"></i><span>站内搜索</span></div><div class="rightMenu-item" id="menu-music-toggle"><i class="solitude fas fa-play"></i><span>播放音乐</span></div><div class="rightMenu-item" id="menu-music-back"><i class="solitude fas fa-backward"></i><span>切换到上一首</span></div><div class="rightMenu-item" id="menu-music-forward"><i class="solitude fas fa-forward"></i><span>切换到下一首</span></div><div class="rightMenu-item" id="menu-music-copyMusicName"><i class="solitude fas fa-clone"></i><span>复制歌名</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><div class="rightMenu-item" id="menu-randomPost" onclick="toRandomPost()||rm.hideRightMenu()"><i class="solitude fas fa-dice"></i><span>随机文章</span></div><div class="rightMenu-item" id="menu-tags" onclick="pjax.loadUrl('/tags/')||rm.hideRightMenu()"><i class="solitude fas fa-tags"></i><span>全部标签</span></div><div class="rightMenu-item" id="menu-categories" onclick="pjax.loadUrl('/categories/')||rm.hideRightMenu()"><i class="solitude fas fa-clone"></i><span>全部分类</span></div><div class="rightMenu-item" id="menu-copy-page-link" onclick="rm.copyText(window.location.href)||rm.hideRightMenu()"><i class="solitude fas fa-link"></i><span>复制页面链接</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><div class="rightMenu-item" id="menu-darkmode" onclick="sco.switchDarkMode()"><i class="solitude fas fa-circle-half-stroke"></i><span class="menu-darkmode-text">深色模式</span></div><div class="rightMenu-item" id="menu-translate"><i class="solitude fas fa-language"></i><span>轉為繁體</span></div></div></div><div id="rightmenu-mask"></div></div><div><!-- Critical scripts loaded synchronously--><script src="/js/utils.js?v=3.0.21"></script><script src="/js/main.js?v=3.0.21"></script><!-- Non-critical scripts loaded asynchronously--><script async src="/js/third_party/waterfall.min.js?v=3.0.21"></script><script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js"></script><!-- Feature-specific scripts loaded asynchronously--><script async src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script><script defer src="/js/third_party/universe.min.js?v=3.0.21"></script><script>document.addEventListener('DOMContentLoaded', () => {
+  if (typeof dark === 'function') dark();
+});
+</script><script defer src="/js/tw_cn.js?v=3.0.21"></script><script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/copy-tex.min.js"><script>(() => {
+  document.querySelectorAll('.article-container span.katex-display').forEach(item => {
+    utils.wrap(item, 'div', {class: 'katex-wrap'})
+  })
+})();
+</script></script><!-- UI enhancement scripts--><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@19.1.3/dist/lazyload.iife.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/node-snackbar@0.1.16/dist/snackbar.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.36/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/swiper@11.0.5/swiper-bundle.min.js"></script><!-- Music player scripts--><script>var meting_api = 'https://api.injahow.cn/meting/?server=:server&type=:type&id=:id&auth=:auth&r=:r';</script><script defer src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/meting@2.0.1/dist/Meting.min.js"></script><!-- Cover color processing scripts--><script defer src="https://cdn.jsdelivr.net/npm/colorthief@2.6.0/dist/color-thief.min.js"></script><script defer src="/js/covercolor/local.js?v=3.0.21"></script><script>window.paceOptions = {
+  restartOnPushState: false
+}
+
+utils.addGlobalFn('pjaxSend', () => {
+  Pace.restart()
+}, 'pace_restart')
+</script><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!-- Search functionality--><!-- Right menu functionality--><script defer src="/js/right_menu.js?v=3.0.21"></script><div class="js-pjax"><script defer pjax src="https://cdn.jsdelivr.net/npm/busuanzi@2.3.0/bsz.pure.mini.min.js"></script></div></div><!-- pjax--><script>let pjax = null;
+
+function initPjax() {
+    if (typeof Pjax === 'undefined') {
+        console.warn('Pjax is not loaded yet, retrying...');
+        setTimeout(initPjax, 100);
+        return;
+    }
+
+    pjax = new Pjax({
+        elements: 'a:not([target="_blank"])',
+        selectors: ["title","#body-wrap","#site-config","meta[name=\"description\"]",".js-pjax","meta[property^=\"og:\"]","#config-diff",".rs_show",".rs_hide"],
+        cacheBust: false,
+        analytics: false,
+        scrollRestoration: false
+    })
+
+    // 将 pjax 实例挂载到全局
+    window.pjax = pjax;
+
+    document.querySelectorAll('script[data-pjax]').forEach(item => {
+        const newScript = document.createElement('script')
+        const content = item.text || item.textContent || item.innerHTML || ""
+        Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+        newScript.appendChild(document.createTextNode(content))
+        item.parentNode.replaceChild(newScript, item)
+    })
+
+    document.addEventListener('pjax:complete', () => {
+        window.refreshFn()
+
+        document.querySelectorAll('script[data-pjax]').forEach(item => {
+            const newScript = document.createElement('script')
+            const content = item.text || item.textContent || item.innerHTML || ""
+            Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+            newScript.appendChild(document.createTextNode(content))
+            item.parentNode.replaceChild(newScript, item)
+        })
+
+        GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+    })
+
+    document.addEventListener('pjax:error', (e) => {
+        if (e.request.status === 404) {
+            pjax.loadUrl('/404.html')
+        }
+    })
+}
+
+// 初始化 Pjax
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initPjax);
+} else {
+    initPjax();
+}</script><!-- google adsense--><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><button class="search-close-button"><i class="solitude fas fa-xmark"></i></button></nav><div class="search-wrap"><div class="search-box"><input class="search-box-input" id="search-input" type="text" autocomplete="off" spellcheck="false" autocorrect="off" autocapitalize="off" placeholder="输入关键词快速查找"></div><div id="search-results"><div id="search-hits"></div></div><div id="search-pagination"></div><div id="search-tips"></div></div></div><div id="search-mask"></div></div><script src="/js/search/local.js?v=3.0.21"></script><div><div class="needEndHide" id="nav-music"><div id="nav-music-hoverTips"><i class="music-control-btn fas fa-backward-step" id="music-prev" onclick="sco.musicSkipBack()"></i><i class="music-control-btn fas fa-pause" id="music-pause" onclick="sco.musicToggle()"></i><i class="music-control-btn fas fa-play" id="music-play" onclick="sco.musicToggle()"></i><i class="music-control-btn fas fa-forward-step" id="music-next" onclick="sco.musicSkipForward()"></i></div><meting-js id="17696185278" server="netease" type="playlist" mutex="true" preload="none" theme="var(--efu-main)" data-lrctype="0" order="random" volume="0.8"></meting-js></div></div></body></html>
+        <script>
+            const posts = ["2026/05/01/发发发/","2026/04/30/hello-world/"];
+            function toRandomPost() {
+                const randomPost = posts[Math.floor(Math.random() * posts.length)];
+                pjax.loadUrl(GLOBAL_CONFIG.root + randomPost);
+            }
+        </script>

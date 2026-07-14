@@ -9751,8 +9751,8 @@ span.tags-punctuation {
     height: 100%;
     top: 0;
     left: 0;
-    -webkit-box-shadow: 0 -109px 133px -9px var(--efu-main) inset;
-    box-shadow: 0 -109px 133px -9px var(--efu-main) inset;
+    -webkit-box-shadow: 0 -60px 80px -20px var(--efu-main) inset;
+    box-shadow: 0 -60px 80px -20px var(--efu-main) inset;
   }
   .topGroup .todayCard.hide {
     opacity: 0;

@@ -524,12 +524,12 @@
   <script>
     // === Background ===
     /**
-     * Set background from local images randomly
+     * Set background from random scenery image API
      */
     function setBg() {
       var el = document.getElementById('bg');
-      var images = ['/img/bg1.webp', '/img/bg2.webp', '/img/bg3.webp'];
-      var url = images[Math.floor(Math.random() * images.length)] + '?v=' + Date.now();
+      // 国内风景图随机 API，加时间戳防止缓存
+      var url = 'https://tu.ltyuanfang.cn/api/fengjing.php?_=' + Date.now();
       var img = new Image();
       img.onload = function () {
         el.style.backgroundImage = 'url(' + url + ')';

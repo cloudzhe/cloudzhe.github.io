@@ -13889,6 +13889,11 @@ div#banners .bannerText {
   -ms-transition: all 0.3s ease;
   transition: all 0.3s ease;
 }
+.tags-group-icon img {
+  width: 60%;
+  height: 60%;
+  object-fit: contain;
+}
 .tags-group-icon:hover {
   background: rgba(255,255,255,0.2) !important;
   -webkit-box-shadow: 0 12px 32px rgba(0,0,0,0.18), inset 0 0 0 1px rgba(255,255,255,0.3);

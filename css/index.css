@@ -9886,7 +9886,7 @@ span.tags-punctuation {
   display: flex;
   position: absolute;
   bottom: 20px;
-  right: 40px;
+  left: 40px;
   -webkit-box-orient: vertical;
   -moz-box-orient: vertical;
   -o-box-orient: vertical;
@@ -9896,17 +9896,11 @@ span.tags-punctuation {
   max-width: 320px;
   z-index: 2;
 }
-@media screen and (max-width: 768px) {
-  .banners-links {
-    left: 40px;
-    right: auto;
-  }
-}
 .banners-welcome {
   color: var(--efu-white);
   font-size: 14px;
   line-height: 1.7;
-  text-align: right;
+  text-align: left;
   text-shadow: 0 2px 8px rgba(0,0,0,0.4);
 }
 .banners-welcome .banners-welcome-title {

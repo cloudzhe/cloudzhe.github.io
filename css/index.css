@@ -5588,6 +5588,11 @@ span.tags-punctuation i {
     display: none;
   }
 }
+#footer #footer_deal .footer_mini_logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
 #footer #footer_deal .footer_mini_logo:hover {
   -webkit-transform: scale(1.2);
   -moz-transform: scale(1.2);
@@ -7261,6 +7266,11 @@ span.tags-punctuation i {
 }
 .back-home-button i {
   font-size: 20px;
+}
+.back-home-button .back-home-button-icon {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
 }
 .back-home-button:hover {
   background: var(--efu-main);

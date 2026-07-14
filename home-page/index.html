@@ -524,12 +524,12 @@
   <script>
     // === Background ===
     /**
-     * Set background from Lorem Picsum random landscape
+     * Set background from local images randomly
      */
     function setBg() {
       var el = document.getElementById('bg');
-      // Lorem Picsum: free random high-quality images, CORS-friendly
-      var url = 'https://picsum.photos/1920/1080?random=' + Date.now();
+      var images = ['/img/bg1.webp', '/img/bg2.webp', '/img/bg3.webp'];
+      var url = images[Math.floor(Math.random() * images.length)] + '?v=' + Date.now();
       var img = new Image();
       img.onload = function () {
         el.style.backgroundImage = 'url(' + url + ')';
